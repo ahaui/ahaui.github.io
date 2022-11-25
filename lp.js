@@ -34,7 +34,7 @@ function handler(){
   const isVersionA = abTestingVersion === 0;
   // Quick navigation
   const header = getEl('header');
-  header.style = ' position: sticky; top: 0; left:0;'
+  header.style = ' position: fixed; top: 0; left:0;'
   const headerHeight = header.clientHeight;
   const navigationList = ['how-it-works','benefits','pricing'];
   const pricingSection =  getEl('section-pricing');
