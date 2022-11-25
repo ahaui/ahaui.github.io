@@ -109,3 +109,5 @@ function handler(){
     });
   });
 }
+
+handler();
