@@ -1,5 +1,32 @@
+"use strict";
+
+const colors = {
+  white: '#ffffff',
+  primary: '#00A0E3',
+  warning: '#ffc400'
+}
+
+const getEl = (id) => {
+  const element = document.querySelector('.js-' + id);
+  if (!element) {
+    throw new Error('Element not found: ' + id);
+  }
+  return element;
+};
+
+const tracking = (event, data) => {
+  if (window.gtag) {
+    {
+      window.gtag('event', event, {
+        ...data,
+        version: appConfigs.abTestingVersion,
+      });
+    }
+  }
+};
+
 function handler(){
-  const isVersionA = appConfigs.version === 0;
+  const isVersionA = appConfigs.abTestingVersion === 0;
   // Quick navigation
   const header = getEl('header');
   header.style = ' position: sticky; top: 0;'
