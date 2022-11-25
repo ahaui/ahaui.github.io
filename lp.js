@@ -31,4 +31,5 @@ function handler(){
   console.log('AppJS Loaded!!')
 }
 
-document.addEventListener('DOMContentLoaded', handler);
+handler();
+
