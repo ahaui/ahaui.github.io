@@ -26,7 +26,8 @@ const tracking = (event, data) => {
 };
 
 function handler(){
-  console.log('AppJS Loaded!!')
+  console.log('AppJS Loaded!!');
+  const isVersionA = appConfigs.version === 0;
   // Quick navigation
   const header = getEl('header');
   header.style = ' position: sticky; top: 0;'
@@ -35,7 +36,7 @@ function handler(){
   const pricingSection =  getEl('section-pricing');
   navigationList.forEach((item) => {
     const navigationItem = getEl('navigation-item-' + item);
-    navigationItem.style = `border-bottom: 2px solid transparent; padding-bottom: 4px;`;
+    navigationItem.style = `border-bottom: 2px solid transparent; border-radius: 0`;
     const section = getEl('section-' + item);
     navigationItem.addEventListener('click', () => {
       navigationItem.style.setProperty('border-color', `${colors.warning}`);
@@ -53,6 +54,24 @@ function handler(){
         content_type: item.replace('-', '_'),
         item_id: 'main_navigation',
       });
+    });
+  });
+  // Start Trial button
+  const startTrialButton = getEl('start-trial-button');
+  startTrialButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    const sku = startTrialButton.getAttribute('href')[startTrialButton.getAttribute('href').length - 1];
+    if(isVersionA) {
+        window.scrollTo({
+          top: pricingSection.offsetTop - headerHeight,
+          behavior: 'smooth'
+        });
+    } else {
+      window.location.href = '/cart?sku=' + sku + '&version=' + appConfigs.version;
+    }
+    tracking('select_content', {
+      content_type: 'start_trial',
+      item_id: 'start_trial',
     });
   });
 }
