@@ -1,32 +1,4 @@
-"use strict";
-
-const colors = {
-  white: '#ffffff',
-  primary: '#00A0E3',
-  warning: '#ffc400'
-}
-
-const getEl = (id) => {
-  const element = document.querySelector('.js-' + id);
-  if (!element) {
-    throw new Error('Element not found: ' + id);
-  }
-  return element;
-};
-
-const tracking = (event, data) => {
-  if (window.gtag) {
-    {
-      window.gtag('event', event, {
-        ...data,
-        version: configs.version,
-      });
-    }
-  }
-};
-
 function handler(){
-  console.log('AppJS Loaded!!');
   const isVersionA = appConfigs.version === 0;
   // Quick navigation
   const header = getEl('header');
@@ -36,7 +8,7 @@ function handler(){
   const pricingSection =  getEl('section-pricing');
   navigationList.forEach((item) => {
     const navigationItem = getEl('navigation-item-' + item);
-    navigationItem.style = `border-bottom: 2px solid transparent; border-radius: 0`;
+    navigationItem.style = `border-bottom: 2px solid transparent; padding-bottom: 4px;`;
     const section = getEl('section-' + item);
     navigationItem.addEventListener('click', () => {
       navigationItem.style.setProperty('border-color', `${colors.warning}`);
@@ -56,25 +28,48 @@ function handler(){
       });
     });
   });
-  // Start Trial button
-  const startTrialButton = getEl('start-trial-button');
-  startTrialButton.addEventListener('click', (event) => {
-    event.preventDefault();
-    const sku = startTrialButton.getAttribute('href')[startTrialButton.getAttribute('href').length - 1];
+  
+
+  // Start Trial, Try it now, Start free trial button
+  const buttonList = ['start-trial','try-it-now','start-free-trial'];
+  buttonList.forEach((item) => {
+    const button = getEl('button-' + item);
+    button.addEventListener('click', (event) => {
+      event.preventDefault();
+    const sku = button.getAttribute('href')[button.getAttribute('href').length-1];
     if(isVersionA) {
         window.scrollTo({
           top: pricingSection.offsetTop - headerHeight,
           behavior: 'smooth'
         });
     } else {
-      window.location.href = '/cart/?sku=' + sku + '&version=' + appConfigs.version;
+      window.location.href = '/cart?sku=' + sku + '&version=' + appConfigs.version;
     }
-    tracking('select_content', {
-      content_type: 'start_trial',
-      item_id: 'start_trial',
+      tracking('select_content', {
+        content_type: 'start_trial',
+        item_id: item.replace('-', '_'),
+      });
+    });
+  });
+
+  // SKU button
+  const skuButton = getEl('sku-item');
+  skuButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    const data = skuButton.getAttribute('href');
+    const sku = data.match(/sku\/=(.*?)&/)[1];
+    const price = data.match(/price=(\d+(\.\d+)?)/)[1];
+    const type = data.match(/type=(\w.+)/)[1];
+    window.location.href = '/cart?sku=' + sku + '&version=' + appConfigs.version;
+    tracking('add_to_cart', {
+      currency: 'USD',
+      value: price || 0,
+      items: [
+        {
+          item_id: sku,
+          item_name: type,
+        },
+      ],
     });
   });
 }
-
-handler();
-
