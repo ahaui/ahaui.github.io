@@ -26,6 +26,9 @@ const tracking = (event, data) => {
 };
 
 function handler(){
+  console.log('AppJS Loaded!!',{
+    abVersion: appConfigs.abTestingVersion,
+  })
   const isVersionA = appConfigs.abTestingVersion === 0;
   // Quick navigation
   const header = getEl('header');
