@@ -40,7 +40,8 @@ function handler(){
   const pricingSection =  getEl('section-pricing');
   navigationList.forEach((item) => {
     const navigationItem = getEl('navigation-item-' + item);
-    navigationItem.style = `border-bottom: 2px solid transparent; border-radius:0`;
+    navigationItem.style = `border-bottom: 2px solid transparent; border-radius:0; width: auto; height: auto; padding: 8px 0; margin: 0 8px;`;
+    navigationItem.firstChild.style = `display: contents; padding:0`;
     const section = getEl('section-' + item);
     navigationItem.addEventListener('click', () => {
       navigationItem.style.setProperty('border-color', `${colors.warning}`);
