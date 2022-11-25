@@ -32,7 +32,7 @@ function handler(){
   header.style = ' position: sticky; top: 0;'
   const headerHeight = header.clientHeight;
   const navigationList = ['how-it-works','benefits','pricing'];
-  const pricingSection =  getEl('section-' + item);
+  const pricingSection =  getEl('section-pricing');
   navigationList.forEach((item) => {
     const navigationItem = getEl('navigation-item-' + item);
     navigationItem.style = `border-bottom: 2px solid transparent; padding-bottom: 4px;`;
