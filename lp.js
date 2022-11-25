@@ -72,4 +72,13 @@ function handler(){
       ],
     });
   });
+  
+  // Contact us button
+  const contactUsButton = getEl('contact-us-button');
+  contactUsButton.addEventListener('click', (event) => {
+    tracking('select_content', {
+      content_type: 'contact_us',
+      item_id: 'contact_us_cta',
+    });
+  });
 }
