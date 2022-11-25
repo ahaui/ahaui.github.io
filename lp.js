@@ -34,13 +34,13 @@ function handler(){
   const isVersionA = abTestingVersion === 0;
   // Quick navigation
   const header = getEl('header');
-  header.style = ' position: sticky; top: 0;'
+  header.style = ' position: sticky; top: 0; left:0;'
   const headerHeight = header.clientHeight;
   const navigationList = ['how-it-works','benefits','pricing'];
   const pricingSection =  getEl('section-pricing');
   navigationList.forEach((item) => {
     const navigationItem = getEl('navigation-item-' + item);
-    navigationItem.style = `border-bottom: 2px solid transparent; padding-bottom: 4px;`;
+    navigationItem.style = `border-bottom: 2px solid transparent; border-radius:0`;
     const section = getEl('section-' + item);
     navigationItem.addEventListener('click', () => {
       navigationItem.style.setProperty('border-color', `${colors.warning}`);
