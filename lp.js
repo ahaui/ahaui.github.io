@@ -6,6 +6,8 @@ const colors = {
   warning: '#ffc400'
 }
 
+const abTestingVersion = appConfigs.abTestingVersion;
+
 const getEl = (id) => {
   const element = document.querySelector('.js-' + id);
   if (!element) {
@@ -19,7 +21,7 @@ const tracking = (event, data) => {
     {
       window.gtag('event', event, {
         ...data,
-        version: appConfigs.abTestingVersion,
+        version: abTestingVersion,
       });
     }
   }
@@ -27,9 +29,9 @@ const tracking = (event, data) => {
 
 function handler(){
   console.log('AppJS Loaded!!',{
-    abVersion: appConfigs.abTestingVersion,
+    abVersion: abTestingVersion,
   })
-  const isVersionA = appConfigs.abTestingVersion === 0;
+  const isVersionA = abTestingVersion === 0;
   // Quick navigation
   const header = getEl('header');
   header.style = ' position: sticky; top: 0;'
@@ -73,7 +75,7 @@ function handler(){
           behavior: 'smooth'
         });
     } else {
-      window.location.href = '/cart/?sku=' + sku + '&version=' + appConfigs.version;
+      window.location.href = '/cart/?sku=' + sku + '&version=' + abTestingVersion;
     }
       tracking('select_content', {
         content_type: 'start_trial',
@@ -90,7 +92,7 @@ function handler(){
     const sku = data.match(/sku\/=(.*?)&/)[1];
     const price = data.match(/price=(\d+(\.\d+)?)/)[1];
     const type = data.match(/type=(\w.+)/)[1];
-    window.location.href = '/cart/?sku=' + sku + '&version=' + appConfigs.version;
+    window.location.href = '/cart/?sku=' + sku + '&version=' + abTestingVersion;
     tracking('add_to_cart', {
       currency: 'USD',
       value: price || 0,
