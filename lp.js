@@ -43,7 +43,7 @@ function handler(){
           behavior: 'smooth'
         });
     } else {
-      window.location.href = '/cart?sku=' + sku + '&version=' + appConfigs.version;
+      window.location.href = '/cart/?sku=' + sku + '&version=' + appConfigs.version;
     }
       tracking('select_content', {
         content_type: 'start_trial',
@@ -60,7 +60,7 @@ function handler(){
     const sku = data.match(/sku\/=(.*?)&/)[1];
     const price = data.match(/price=(\d+(\.\d+)?)/)[1];
     const type = data.match(/type=(\w.+)/)[1];
-    window.location.href = '/cart?sku=' + sku + '&version=' + appConfigs.version;
+    window.location.href = '/cart/?sku=' + sku + '&version=' + appConfigs.version;
     tracking('add_to_cart', {
       currency: 'USD',
       value: price || 0,
