@@ -67,7 +67,7 @@ function handler(){
           behavior: 'smooth'
         });
     } else {
-      window.location.href = '/cart?sku=' + sku + '&version=' + appConfigs.version;
+      window.location.href = '/cart/?sku=' + sku + '&version=' + appConfigs.version;
     }
     tracking('select_content', {
       content_type: 'start_trial',
