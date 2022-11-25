@@ -27,8 +27,8 @@ const tracking = (event, data) => {
 
 console.log('AppJS Loading...')
 
-const handler = () => {
-  console.log('AppJS Loaded!!');
-};
+function handler(){
+  console.log('AppJS Loaded!!')
+}
 
 document.addEventListener('DOMContentLoaded', handler);
