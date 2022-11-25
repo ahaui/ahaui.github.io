@@ -50,7 +50,7 @@ function handler(){
         behavior: 'smooth'
       });
       tracking('select_content', {
-        content_type: item.replace('-', '_'),
+        content_type: item.replaceAll('-', '_'),
         item_id: 'main_navigation',
       });
     });
@@ -74,7 +74,7 @@ function handler(){
     }
       tracking('select_content', {
         content_type: 'start_trial',
-        item_id: item.replace('-', '_'),
+        item_id: item.replaceAll('-', '_'),
       });
     });
   });
