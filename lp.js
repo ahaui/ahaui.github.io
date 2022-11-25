@@ -60,7 +60,7 @@ function handler(){
   // Start Trial, Try it now, Start free trial button
   const buttonList = ['start-trial','try-it-now','start-free-trial'];
   buttonList.forEach((item) => {
-    const button = getEl('button-' + item);
+    const button = getEl(item + '-button');
     button.addEventListener('click', (event) => {
       event.preventDefault();
     const sku = button.getAttribute('href')[button.getAttribute('href').length-1];
