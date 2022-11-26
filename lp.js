@@ -35,7 +35,7 @@ function handler(){
   // Quick navigation
   const header = getEl('header');
   header.style = ' position: fixed; right: 0; margin: 0 auto; max-width: 1120px;'
-  header.querySelectorAll(":scope > [class=$'-overlay']").style = `width: 200%; left: -50%; background: inherit;`;
+  header.querySelectorAll(":scope > [id=$'-overlay']").style = `width: 200%; left: -50%; background: inherit;`;
   const headerHeight = header.clientHeight;
   const navigationList = ['how-it-works','benefits','pricing'];
   const pricingSection =  getEl('section-pricing');
