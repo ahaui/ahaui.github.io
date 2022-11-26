@@ -16,6 +16,14 @@ const getEl = (id) => {
   return element;
 };
 
+const getEls = (id) => {
+  const element = document.querySelectorAll('.js-' + id);
+  if (!element) {
+    throw new Error('Elements not found: ' + id);
+  }
+  return element;
+};
+
 const tracking = (event, data) => {
   if (window.gtag) {
     {
@@ -116,23 +124,25 @@ function handler(){
   });
 
   // SKU button
-  const skuButton = getEl('sku-item');
-  skuButton.addEventListener('click', (event) => {
-    event.preventDefault();
-    const data = skuButton.getAttribute('href');
-    const sku = data.match(/sku\/=(.*?)&/)[1];
-    const price = data.match(/price=(\d+(\.\d+)?)/)[1];
-    const type = data.match(/type=(\w.+)/)[1];
-    window.location.href = '/cart/?sku=' + sku + '&version=' + abTestingVersion;
-    tracking('add_to_cart', {
-      currency: 'USD',
-      value: price || 0,
-      items: [
-        {
-          item_id: sku,
-          item_name: type,
-        },
-      ],
+  const skuButtons = getEls('sku-item');
+  skuButtons.forEach((skuButton) => {
+    skuButton.addEventListener('click', (event) => {
+      event.preventDefault();
+      const data = skuButton.getAttribute('href');
+      const sku = data.match(/sku\/=(.*?)&/)[1];
+      const price = data.match(/price=(\d+(\.\d+)?)/)[1];
+      const type = data.match(/type=(\w.+)/)[1];
+      window.location.href = '/cart/?sku=' + sku + '&version=' + abTestingVersion;
+      tracking('add_to_cart', {
+        currency: 'USD',
+        value: price || 0,
+        items: [
+          {
+            item_id: sku,
+            item_name: type,
+          },
+        ],
+      });
     });
   });
   
