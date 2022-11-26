@@ -64,7 +64,7 @@ function handler(){
   });
   
   // Style for Start Trial button
-  const startTrialButton = getE('start-trial-button');
+  const startTrialButton = getEl('start-trial-button');
   startTrialButton.style = 'left: auto; right: 16px;';
   // Start Trial, Try it now, Start free trial button
   const buttonList = ['start-trial','try-it-now','start-free-trial'];
