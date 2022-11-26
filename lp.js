@@ -120,3 +120,24 @@ function handler(){
 }
 
 handler();
+
+const handleScroll = () => {
+    const scrollPosition = window.scrollY + headerHeight;
+    const sectionSelected = navigationList.find((item) => {
+      const section = getEl('section-' + item);
+      const sectionHeight = section.getBoundingClientRect().height;
+      return scrollPosition > section.offsetTop && scrollPosition < section.offsetTop + sectionHeight;
+    });
+    if (sectionSelected) {
+      const navigationItem = getEl('navigation-item-' + sectionSelected);
+      navigationItem.style.setProperty('border-color', `${colors.warning}`);
+      navigationItem.style.setProperty('color', `${colors.warning}`);
+      navigationList.filter((i) => i !== sectionSelected).forEach((i) => {
+        const anotherItem = getEl('navigation-item-' + i);
+        anotherItem.style.setProperty('border-color', 'transparent');
+        anotherItem.style.setProperty('color', `${colors.white}`);
+      });
+    };
+  };
+
+  window.addEventListener('scroll', handleScroll);
