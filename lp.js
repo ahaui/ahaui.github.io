@@ -34,7 +34,7 @@ function handler(){
   const isVersionA = abTestingVersion === 0;
   // Quick navigation
   const header = getEl('header');
-  header.style = ' position: fixed; right: 0; margin: 0 auto; max-width: 1120px;'
+  header.style = ' position: fixed; right: 0; margin: 0 auto; max-width: 1120px; min-width: 320px; width: auto;';
   header.querySelectorAll(":scope > [id=$'-overlay']").style = `width: 200%; left: -50%; background: inherit;`;
   const headerHeight = header.clientHeight;
   const navigationList = ['how-it-works','benefits','pricing'];
@@ -63,7 +63,9 @@ function handler(){
     });
   });
   
-
+  // Style for Start Trial button
+  const startTrialButton = getE('start-trial-button');
+  startTrialButton.style = 'left: auto; right: 16px;';
   // Start Trial, Try it now, Start free trial button
   const buttonList = ['start-trial','try-it-now','start-free-trial'];
   buttonList.forEach((item) => {
