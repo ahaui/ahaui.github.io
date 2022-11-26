@@ -79,7 +79,13 @@ function handler(){
         anotherItem.style.setProperty('border-color', 'transparent');
         anotherItem.style.setProperty('color', `${colors.white}`);
       });
-    };
+    } else {
+      navigationList.forEach((i) => {
+        const anotherItem = getEl('navigation-item-' + i);
+        anotherItem.style.setProperty('border-color', 'transparent');
+        anotherItem.style.setProperty('color', `${colors.white}`);
+      });
+    }
   };
 
   window.addEventListener('scroll', handleScroll);
