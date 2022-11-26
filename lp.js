@@ -76,7 +76,7 @@ function handler(){
     const sectionSelected = navigationList.find((item) => {
       const section = getEl('section-' + item);
       const sectionHeight = section.getBoundingClientRect().height;
-      return scrollPosition > section.offsetTop && scrollPosition < section.offsetTop + sectionHeight;
+      return scrollPosition >= section.offsetTop && scrollPosition < section.offsetTop + sectionHeight;
     });
     if (sectionSelected) {
       const navigationItem = getEl('navigation-item-' + sectionSelected);
